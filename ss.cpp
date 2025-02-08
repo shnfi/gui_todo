@@ -61,6 +61,13 @@ const QString todo_container_SS = "\
     }\
 ";
 
+const QString removing_todo_container_SS = "\
+    #todo_container {\
+        border: 1px solid #db3434; \
+        border-radius: 5px; \
+    }\
+";
+
 const QString remove_todo_button_SS = "\
     QPushButton {\
         height: 27px; \
