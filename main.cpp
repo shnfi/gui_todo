@@ -127,11 +127,27 @@ public:
         QHBoxLayout *todo_container_label_box = new QHBoxLayout(todo_container);
 
         QLabel *todo_label = new QLabel(todo_field->text());
-        todo_label->setAlignment(Qt::AlignCenter);
         todo_field->clear();
 
-        todo_container_label_box->addWidget(todo_label, 1);
+        QPushButton *remove_todo_button = new QPushButton("");
+        remove_todo_button->setFixedWidth(30);
+        remove_todo_button->setStyleSheet(remove_todo_button_SS);
+
+        connect(remove_todo_button, &QPushButton::clicked, this, [=]() { remove_todo(todo_container); });
+
+        todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
+        todo_container_label_box->addWidget(todo_label);
+        todo_container_label_box->addWidget(remove_todo_button);
+        todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
+
         middle_bar_layout->insertWidget(middle_bar_layout->count() - 1, todo_container);
+    }
+
+    void remove_todo(QWidget *tc)
+    {
+        middle_bar_layout->removeWidget(tc);
+        tc->deleteLater();
+        tc = nullptr;
     }
 };
 
