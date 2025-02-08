@@ -9,6 +9,8 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QPropertyAnimation>
+#include <QTimer>
 
 #include "ss.cpp"
 
@@ -118,6 +120,7 @@ public:
         setLayout(container);
     }
 
+private:
     void add_todo()
     {
         QWidget *todo_container = new QWidget();
@@ -147,9 +150,28 @@ public:
 
     void remove_todo(QWidget *tc)
     {
-        middle_bar_layout->removeWidget(tc);
-        tc->deleteLater();
-        tc = nullptr;
+        tc->setStyleSheet(removing_todo_container_SS);
+
+        startAnimation(tc);
+
+        QTimer::singleShot(300, this, [=]() {
+            middle_bar_layout->removeWidget(tc);
+            tc->deleteLater();
+        });
+    }
+
+    void startAnimation(QWidget *mw)
+    {
+        QPropertyAnimation *animation = new QPropertyAnimation(mw, "pos", this);
+
+        animation->setStartValue(mw->pos());
+        animation->setEndValue(QPoint(1000, mw->pos().y()));
+
+        animation->setEasingCurve(QEasingCurve::InOutQuad);
+
+        animation->setDuration(200);
+
+        animation->start();
     }
 };
 
