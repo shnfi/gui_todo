@@ -56,4 +56,21 @@ const QString todo_container_SS = "\
         border: 1px solid #404040; \
         border-radius: 5px; \
     }\
+    #todo_container::hover {\
+        border: 1px solid #3498db; \
+    }\
+";
+
+const QString remove_todo_button_SS = "\
+    QPushButton {\
+        height: 27px; \
+        width: 27px; \
+        background-color: #202020;\
+        border: 1px solid #404040; \
+        color: #FAF9F6; \
+        border-radius: 10px; \
+    }\
+    QPushButton::hover {\
+        border: 1px solid #3498db; \
+    }\
 ";
