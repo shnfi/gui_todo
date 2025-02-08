@@ -57,8 +57,10 @@ public:
 
         connect(todo_button, &QPushButton::clicked, this, &Window::add_todo);
         
+        top_bar_layout->addSpacerItem(new QSpacerItem(5, 5));
         top_bar_layout->addWidget(todo_field, 8);
         top_bar_layout->addWidget(todo_button, 1);
+        top_bar_layout->addSpacerItem(new QSpacerItem(5, 5));
         container->addWidget(top_bar);
 
         // middle bar
@@ -83,6 +85,7 @@ public:
 
         QLabel *music_name_label = new QLabel("Music name");
 
+        bottom_bar_layout->addSpacerItem(new QSpacerItem(20, 20));
         bottom_bar_layout->addWidget(music_name_label);
 
         bottom_bar_layout->addStretch();
@@ -97,7 +100,9 @@ public:
         stop_music->setStyleSheet(control_music_button_SS);
 
         music_control_layout->addWidget(play_music);
+        music_control_layout->addSpacerItem(new QSpacerItem(5, 5));
         music_control_layout->addWidget(stop_music);
+        music_control_layout->addSpacerItem(new QSpacerItem(10, 10));
 
         bottom_bar_layout->addWidget(music_control_widget);
 
