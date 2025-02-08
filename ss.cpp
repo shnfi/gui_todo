@@ -16,7 +16,7 @@ const QString todo_button_SS = "\
         background-color: #202020;\
         border: 1px solid #404040; \
         color: #FAF9F6; \
-        border-radius: 3px; \
+        border-radius: 5px; \
     }\
     QPushButton::hover {\
         border: 1px solid #3498db; \
@@ -30,7 +30,7 @@ const QString todo_field_SS = "\
         background-color: #202020; \
         border: 1px solid #404040; \
         color: #FAF9F6; \
-        border-radius: 3px; \
+        border-radius: 5px; \
     }\
     QLineEdit::focus {\
         border: 1px solid #3498db; \
@@ -71,6 +71,14 @@ const QString remove_todo_button_SS = "\
         border-radius: 10px; \
     }\
     QPushButton::hover {\
-        border: 1px solid #3498db; \
+        border: 1px solid #db3434; \
     }\
+";
+
+const QString music_name_label_SS = "\
+    color: #FAF9F6; \
+";
+
+const QString todo_label_SS = "\
+    color: #FAF9F6; \
 ";

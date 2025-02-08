@@ -84,6 +84,7 @@ public:
         QHBoxLayout *bottom_bar_layout = new QHBoxLayout(bottom_bar);
 
         QLabel *music_name_label = new QLabel("Music name");
+        music_name_label->setStyleSheet(music_name_label_SS);
 
         bottom_bar_layout->addSpacerItem(new QSpacerItem(20, 20));
         bottom_bar_layout->addWidget(music_name_label);
@@ -127,6 +128,7 @@ public:
         QHBoxLayout *todo_container_label_box = new QHBoxLayout(todo_container);
 
         QLabel *todo_label = new QLabel(todo_field->text());
+        todo_label->setStyleSheet(todo_label_SS);
         todo_field->clear();
 
         QPushButton *remove_todo_button = new QPushButton("");
