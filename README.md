@@ -8,11 +8,19 @@ a GUI todo application written in c++ and qt. [Wikipedia](https://en.wikipedia.o
 ```bash
 qmake -project
 ```
-4. then simply run the `build.sh` script to compile the project .
+4. edit the `gui_todo.pro` file .
+```bash
+vi gui_todo.pro
+```
+5. add this line under the `# Input` section .
+```
+QT += core gui widgets
+```
+6. then simply run the `build.sh` script to compile the project .
 ```bash
 ./build.sh
 ```
-5. run the application .
+7. run the application .
 ```bash
 ./todo
 ```
