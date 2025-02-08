@@ -142,7 +142,7 @@ public:
         todo_container_label_box->addWidget(remove_todo_button);
         todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
 
-        middle_bar_layout->insertWidget(middle_bar_layout->count() - 1, todo_container);
+        middle_bar_layout->insertWidget(0, todo_container);
     }
 
     void remove_todo(QWidget *tc)
