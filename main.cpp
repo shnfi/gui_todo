@@ -178,6 +178,16 @@ private:
 
         startAnimation(tc);
 
+        QMediaPlayer *d_player = new QMediaPlayer(this);
+        QAudioOutput *d_output = new QAudioOutput();
+
+        d_output->setVolume(0.35);
+
+        d_player->setAudioOutput(d_output);
+        d_player->setSource(QUrl::fromLocalFile("audio/todo_removing_sound.mp3"));
+
+        d_player->play();
+
         QTimer::singleShot(300, this, [=]() {
             middle_bar_layout->removeWidget(tc);
             tc->deleteLater();
