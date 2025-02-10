@@ -51,6 +51,17 @@ const QString control_music_button_SS = "\
     }\
 ";
 
+const QString disabled_control_music_button_SS = "\
+    QPushButton {\
+        height: 27px; \
+        width: 27px; \
+        background-color:rgba(32, 32, 32, 0.45);\
+        border: 1px solid rgba(64, 64, 64, 0.45); \
+        color:rgba(250, 249, 246, 0.45); \
+        border-radius: 10px; \
+    }\
+";
+
 const QString todo_container_SS = "\
     #todo_container {\
         border: 1px solid #404040; \
