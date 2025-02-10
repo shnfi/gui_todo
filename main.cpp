@@ -11,6 +11,9 @@
 #include <QScrollArea>
 #include <QPropertyAnimation>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QUrl>
 
 #include "ss.cpp"
 
@@ -26,6 +29,10 @@ class Window : public QWidget
 private:
     QVBoxLayout *middle_bar_layout;
     QLineEdit *todo_field;
+    QMediaPlayer *player;
+    QAudioOutput *output;
+    QPushButton *play_music_button;
+    QPushButton *pause_music_button;
 
 public:
     Window(QWidget *parent = nullptr) : QWidget(parent)
@@ -77,6 +84,16 @@ public:
 
         container->addWidget(middle_bar);
 
+        // audio widget
+
+        player = new QMediaPlayer(this);
+        output = new QAudioOutput();
+
+        output->setVolume(0.25);
+
+        player->setAudioOutput(output);
+        player->setSource(QUrl::fromLocalFile("audio/background_music.mp3"));
+
         // bottom bar
         
         QWidget *bottom_bar = new QWidget();
@@ -85,7 +102,7 @@ public:
 
         QHBoxLayout *bottom_bar_layout = new QHBoxLayout(bottom_bar);
 
-        QLabel *music_name_label = new QLabel("Music name");
+        QLabel *music_name_label = new QLabel("Automn Story");
         music_name_label->setStyleSheet(music_name_label_SS);
 
         bottom_bar_layout->addSpacerItem(new QSpacerItem(20, 20));
@@ -96,15 +113,20 @@ public:
         QWidget *music_control_widget = new QWidget();
         QHBoxLayout *music_control_layout = new QHBoxLayout(music_control_widget);
 
-        QPushButton *play_music = new QPushButton("P");
-        QPushButton *stop_music = new QPushButton("S");
+        play_music_button = new QPushButton("P");
+        pause_music_button = new QPushButton("S");
 
-        play_music->setStyleSheet(control_music_button_SS);
-        stop_music->setStyleSheet(control_music_button_SS);
+        connect(play_music_button, &QPushButton::clicked, this, &Window::play_music );
+        connect(pause_music_button, &QPushButton::clicked, this, &Window::pause_music );
 
-        music_control_layout->addWidget(play_music);
+        play_music_button->setStyleSheet(control_music_button_SS);
+        pause_music_button->setStyleSheet(control_music_button_SS);
+
+        play_music();
+
+        music_control_layout->addWidget(play_music_button);
         music_control_layout->addSpacerItem(new QSpacerItem(5, 5));
-        music_control_layout->addWidget(stop_music);
+        music_control_layout->addWidget(pause_music_button);
         music_control_layout->addSpacerItem(new QSpacerItem(10, 10));
 
         bottom_bar_layout->addWidget(music_control_widget);
@@ -172,6 +194,28 @@ private:
         animation->setDuration(200);
 
         animation->start();
+    }
+
+    void play_music()
+    {
+        player->play();
+
+        play_music_button->setEnabled(false);
+        pause_music_button->setEnabled(true);
+
+        play_music_button->setStyleSheet(disabled_control_music_button_SS);
+        pause_music_button->setStyleSheet(control_music_button_SS);
+    }
+
+    void pause_music()
+    {
+        player->pause();
+
+        play_music_button->setEnabled(true);
+        pause_music_button->setEnabled(false);
+
+        play_music_button->setStyleSheet(control_music_button_SS);
+        pause_music_button->setStyleSheet(disabled_control_music_button_SS);
     }
 };
 
