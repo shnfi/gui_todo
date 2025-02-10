@@ -94,6 +94,8 @@ public:
         player->setAudioOutput(output);
         player->setSource(QUrl::fromLocalFile("audio/background_music.mp3"));
 
+        connect(player, &QMediaPlayer::mediaStatusChanged, this, &Window::play_again);
+
         // bottom bar
         
         QWidget *bottom_bar = new QWidget();
@@ -216,6 +218,15 @@ private:
 
         play_music_button->setStyleSheet(control_music_button_SS);
         pause_music_button->setStyleSheet(disabled_control_music_button_SS);
+    }
+
+    void play_again(QMediaPlayer::MediaStatus status)
+    {
+        if (status == QMediaPlayer::EndOfMedia)
+        {
+            player->setPosition(0);
+            player->play();
+        }
     }
 };
 
