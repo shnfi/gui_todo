@@ -14,6 +14,7 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QUrl>
+#include <QMessageBox>
 
 #include "ss.cpp"
 
@@ -147,29 +148,42 @@ public:
 private:
     void add_todo()
     {
-        QWidget *todo_container = new QWidget();
-        todo_container->setFixedHeight(50);
-        todo_container->setObjectName("todo_container");
-        todo_container->setStyleSheet(todo_container_SS);
+        if (todo_field->text() == "")
+        {
+            QMessageBox *error_msgbox = new QMessageBox(this);
+            error_msgbox->setWindowTitle("FILL THE FIELD");
+            error_msgbox->setIcon(QMessageBox::Information);
+            error_msgbox->setText("Write something in the field!");
+            error_msgbox->setInformativeText("The todo title's field must not be empty!");
+            error_msgbox->setStandardButtons(QMessageBox::Ok);
+            error_msgbox->exec();
+        }
+        else
+        {
+            QWidget *todo_container = new QWidget();
+            todo_container->setFixedHeight(50);
+            todo_container->setObjectName("todo_container");
+            todo_container->setStyleSheet(todo_container_SS);
 
-        QHBoxLayout *todo_container_label_box = new QHBoxLayout(todo_container);
+            QHBoxLayout *todo_container_label_box = new QHBoxLayout(todo_container);
 
-        QLabel *todo_label = new QLabel(todo_field->text());
-        todo_label->setStyleSheet(todo_label_SS);
-        todo_field->clear();
+            QLabel *todo_label = new QLabel(todo_field->text());
+            todo_label->setStyleSheet(todo_label_SS);
+            todo_field->clear();
 
-        QPushButton *remove_todo_button = new QPushButton("");
-        remove_todo_button->setFixedWidth(30);
-        remove_todo_button->setStyleSheet(remove_todo_button_SS);
+            QPushButton *remove_todo_button = new QPushButton("");
+            remove_todo_button->setFixedWidth(30);
+            remove_todo_button->setStyleSheet(remove_todo_button_SS);
 
-        connect(remove_todo_button, &QPushButton::clicked, this, [=]() { remove_todo(todo_container); });
+            connect(remove_todo_button, &QPushButton::clicked, this, [=]() { remove_todo(todo_container); });
 
-        todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
-        todo_container_label_box->addWidget(todo_label);
-        todo_container_label_box->addWidget(remove_todo_button);
-        todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
+            todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
+            todo_container_label_box->addWidget(todo_label);
+            todo_container_label_box->addWidget(remove_todo_button);
+            todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
 
-        middle_bar_layout->insertWidget(0, todo_container);
+            middle_bar_layout->insertWidget(0, todo_container);
+        }
     }
 
     void remove_todo(QWidget *tc)
