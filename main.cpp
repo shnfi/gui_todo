@@ -182,7 +182,7 @@ private:
             todo_container_label_box->addWidget(remove_todo_button);
             todo_container_label_box->addSpacerItem(new QSpacerItem(5, 5));
 
-            middle_bar_layout->insertWidget(0, todo_container);
+            middle_bar_layout->insertWidget(middle_bar_layout->count() - 1, todo_container);
         }
     }
 
@@ -190,7 +190,7 @@ private:
     {
         tc->setStyleSheet(removing_todo_container_SS);
 
-        startAnimation(tc);
+        removnig_todo_animation(tc);
 
         QMediaPlayer *d_player = new QMediaPlayer(this);
         QAudioOutput *d_output = new QAudioOutput();
@@ -208,7 +208,7 @@ private:
         });
     }
 
-    void startAnimation(QWidget *mw)
+    void removnig_todo_animation(QWidget *mw)
     {
         QPropertyAnimation *animation = new QPropertyAnimation(mw, "pos", this);
 
